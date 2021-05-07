@@ -1,6 +1,6 @@
 (defun c:pt_out1()
  (setq ss (ssget '((0 . "LINE"))))
- (setq csv_file (getfiled "匯出檔名" "D:\\" "csv" 1))
+ (setq csv_file (getfiled "Export file" "D:\\" "csv" 1))
  (setq fw (open csv_file "w"))
  (setq n 0)
  (repeat (sslength ss)
@@ -19,14 +19,14 @@
 )
 
 (defun c:pt_out2()
- (prompt "\n選擇一組線段...")
+ (prompt "\nSelect lines...")
  (setq ss (ssget '((0 . "LINE"))))
  (if ss
     (progn
-      (get_pt_list)  ;;收集點資料
-      (export_file)  ;;匯出點資料
+      (get_pt_list)  
+      (export_file)  
     )
-    (alert "沒選到線!")
+    (alert "Not found!")
  )  
  (princ) 
 )
@@ -45,7 +45,7 @@
 )
 
 (defun export_file()
- (setq csv_file (getfiled "匯出檔名" "D:\\" "csv" 1))
+ (setq csv_file (getfiled "Export file" "D:\\" "csv" 1))
  (setq fw (open csv_file "w"))
  (foreach item pt_list
    (setq p1 (nth 0 item))
@@ -56,13 +56,13 @@
    (write-line str fw)
  )
  (close fw)
- (alert "點資料匯出")
+ (alert "points data exported.")
  (princ)
 )
 
 (defun c:pt_in1()
   (setvar "cmdecho" 0)
-  (setq csv_file (getfiled "匯入檔名" "D:\\" "csv" 4))
+  (setq csv_file (getfiled "Import file" "D:\\" "csv" 4))
   (setq fr (open csv_file "r"))
   (while (setq str (read-line fr))
 ;;;    (setq str "1545.9903,642.8007,1545.9903,648.0731")
@@ -85,7 +85,7 @@
 
 (defun c:pt_in2()
   (setvar "cmdecho" 0)
-  (setq csv_file (getfiled "匯入檔名" "D:\\" "csv" 4))
+  (setq csv_file (getfiled "Import file" "D:\\" "csv" 4))
   (load "ReadCSV")
   (setq data (LM:readcsv csv_file))
   (foreach item data
