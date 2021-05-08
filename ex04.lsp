@@ -1,3 +1,4 @@
+;;modify by Ianchang001
 (defun c:pt_out1()
  (setq ss (ssget '((0 . "LINE"))))
  (setq csv_file (getfiled "Export file" "D:\\" "csv" 1))
