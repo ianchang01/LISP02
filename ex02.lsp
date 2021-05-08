@@ -1,3 +1,4 @@
+;;Ex clone by Ian
 ;;==========================================================================
 (defun set_layer(lname col ltype)
   (if (tblsearch "LAYER" lname)
